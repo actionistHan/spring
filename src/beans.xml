@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean autowire="byName" class="com.hzg.spring.bean.OrderService" id="orderService1"/>
+
+    <!--配置Master对象-->
+    <bean class="com.hzg.spring.bean.Master" id="master">
+        <!--第一个name属性赋值-->
+        <property name="name" value="太上老君"/>
+        <!--给List属性赋值-->
+        <property name="monsterList">
+            <list>
+                <!--使用引用的方法给List赋值-->
+                <ref bean="monster00"/>
+                <!--使用内部bean给List赋值-->
+                <bean class="com.hzg.spring.bean.Monster">
+                    <property name="name" value="黄袍怪"/>
+                    <property name="skill" value="斗篷"/>
+                    <property name="monsterId" value="5"/>
+                </bean>
+            </list>
+        </property>
+        <!--给map属性赋值
+            :map标签包裹起来，里面是一对一对entry
+        -->
+        <property name="monsterMap">
+            <map>
+                <entry>
+                    <key>
+                        <value>monster03</value>
+                    </key>
+                    <ref bean="monster03"/>
+                </entry>
+                <entry>
+                    <key>
+                        <value>monster04</value>
+                    </key>
+                    <bean class="com.hzg.spring.bean.Monster">
+                        <property name="monsterId" value="6"/>
+                        <property name="skill" value="紫金葫芦"/>
+                        <property name="name" value="金角大王"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+
+    </bean>
+
+
+
+
+
+
+
+
+
+    <bean class="com.hzg.spring.bean.Monster" id="monster00">
+        <property name="monsterId" value="1"/>
+        <property name="name" value="牛魔王"/>
+        <property name="skill" value="芭蕉扇"/>
+    </bean>
+
+    <bean class="com.hzg.spring.bean.Monster" id="monster01">
+        <property name="monsterId" value="2"/>
+        <property name="name" value="孙悟空"/>
+        <property name="skill" value="金箍棒"/>
+    </bean>
+
+    <bean class="com.hzg.spring.bean.Monster" id="monster02">
+        <property name="monsterId" value="3"/>
+        <property name="name" value="猪八戒"/>
+        <property name="skill" value="九齿耙"/>
+    </bean>
+
+    <bean class="com.hzg.spring.bean.Monster" id="monster03">
+        <property name="monsterId" value="4"/>
+        <property name="name" value="沙悟净"/>
+        <property name="skill" value="权杖"/>
+    </bean>
+
+
+</beans>
